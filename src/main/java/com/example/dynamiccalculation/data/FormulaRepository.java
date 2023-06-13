@@ -1,6 +1,5 @@
 package com.example.dynamiccalculation.data;
-import io.spring.guides.gs_producing_web_service.FormulaResponse1;
-import com.example.dynamiccalculation.dto.FormulaResponse;
+import io.spring.guides.gs_producing_web_service.FormulaResponse;
 import com.example.dynamiccalculation.entity.Formula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -17,13 +16,13 @@ public class FormulaRepository {
         jdbcTemplate.update("INSERT INTO formulas (number, formula) VALUES (?, ?)", inputNumber, result.getFormula());
         return jdbcTemplate.queryForObject("SELECT lastval()", Integer.class);
     }
-    public FormulaResponse1 getFormula(int id) {
+    public FormulaResponse getFormula(int id) {
         return jdbcTemplate.queryForObject("SELECT * FROM formulas WHERE id=?", new Object[] {id},
-                new BeanPropertyRowMapper<>(FormulaResponse1.class));
+                new BeanPropertyRowMapper<>(FormulaResponse.class));
     }
-    public FormulaResponse1 formulaExist(double number) {
-        List<FormulaResponse1> formulas = jdbcTemplate.query("SELECT * FROM formulas WHERE number=?", new Object[]{number},
-                new BeanPropertyRowMapper<>(FormulaResponse1.class));
+    public FormulaResponse formulaExist(double number) {
+        List<FormulaResponse> formulas = jdbcTemplate.query("SELECT * FROM formulas WHERE number=?", new Object[]{number},
+                new BeanPropertyRowMapper<>(FormulaResponse.class));
         if (formulas.isEmpty()) {
             return null;
         }

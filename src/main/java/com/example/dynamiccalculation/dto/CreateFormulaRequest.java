@@ -2,6 +2,8 @@ package com.example.dynamiccalculation.dto;
 
 //import jakarta.validation.constraints.Max;
 //import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateFormulaRequest {
-//    @Min(0)
-//    @Max(1000000000)
+    @Min(0)
+    @Max(1000000000)
     private double formula;
 }
