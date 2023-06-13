@@ -1,5 +1,5 @@
 package com.example.dynamiccalculation.data;
-import com.concretepage.gs_ws.FormulaResponse1;
+import io.spring.guides.gs_producing_web_service.FormulaResponse1;
 import com.example.dynamiccalculation.dto.FormulaResponse;
 import com.example.dynamiccalculation.entity.Formula;
 import org.springframework.beans.factory.annotation.Autowired;
