@@ -5,6 +5,7 @@ import io.spring.guides.gs_producing_web_service.FormulaResponse1;
 
 import com.example.dynamiccalculation.data.FormulaRepository;
 import com.example.dynamiccalculation.service.DynamicCalculationServiceImpl;
+import io.spring.guides.gs_producing_web_service.GetFormulaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -24,18 +25,14 @@ public class FormulaEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createFormulaRequest1")
     @ResponsePayload
     public FormulaResponse1 createFormulaRequest1(@RequestPayload CreateFormulaRequest1 request) {
-        FormulaResponse1 response = new FormulaResponse1();
-        response = calculatorService.createFormula(request.getFormula());
-        return response;
+        return calculatorService.createFormula(request.getFormula());
     }
 
-//    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFormula")
-//    @ResponsePayload
-//    public FormulaResponse1 getFormula(@RequestPayload CreateFormulaRequest1 request) {
-//        FormulaResponse1 response = new FormulaResponse1();
-//        response = calculatorService.createFormula(request.getFormula());
-//        return response;
-//    }
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFormulaRequest")
+    @ResponsePayload
+    public FormulaResponse1 getFormulaRequest(@RequestPayload GetFormulaRequest request) {
+        return calculatorService.getFormula(request.getId());
+    }
 
 //    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createFormulaRequest1")
 //    @ResponsePayload
