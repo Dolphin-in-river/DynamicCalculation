@@ -1,6 +1,9 @@
 package com.example.dynamiccalculation;
 
+import com.example.dynamiccalculation.data.FormulaRepositoryImpl;
+import io.spring.guides.gs_producing_web_service.Formula;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -19,7 +22,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 public class DynamicCalculationApplicationTests {
-
+	@Autowired
+	private FormulaRepositoryImpl formulaRepository;
+	@Test
+	public void givenFormula_whenInsertExists_thenReturnsFormula() {
+		Formula formula = new Formula();
+		formula.setNumber(20.002);
+		formula.setFormula("двадцать целых две тысячные");
+		var id = formulaRepository.save(formula, 20.002);
+		Assertions.assertEquals(id, formulaRepository.formulaExist(20.002).getId());
+	}
 	@Autowired
 	private WebTestClient webClient;
 	private String sendCorrectRequest(String request) {

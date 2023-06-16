@@ -1,7 +1,7 @@
 package com.example.dynamiccalculation.service;
 import io.spring.guides.gs_producing_web_service.FormulaResponse;
-import com.example.dynamiccalculation.data.FormulaRepository;
-import com.example.dynamiccalculation.entity.Formula;
+import com.example.dynamiccalculation.data.FormulaRepositoryImpl;
+import io.spring.guides.gs_producing_web_service.Formula;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,17 @@ public class DynamicCalculationServiceImpl implements DynamicCalculationService 
     private NumberTranslateService numberTranslateService;
 
     @Autowired
-    private FormulaRepository formulaRepository;
+    private FormulaRepositoryImpl formulaRepositoryImpl;
 
     public FormulaResponse createFormula(@Valid @DecimalMin("0") @DecimalMax("1000000000") double formula) {
         try {
-            FormulaResponse formulaResponse = formulaRepository.formulaExist(formula);
+            FormulaResponse formulaResponse = formulaRepositoryImpl.formulaExist(formula);
             if (formulaResponse == null) {
                 String translate = numberTranslateService.getTranslate(formula);
-                Formula result = new Formula(formula, translate);
-                int id = formulaRepository.save(result, formula);
+                Formula result = new Formula();
+                result.setFormula(translate);
+                result.setNumber(formula);
+                int id = formulaRepositoryImpl.save(result, formula);
                 FormulaResponse response = new FormulaResponse();
                 response.setId(id);
                 response.setNumber(result.getNumber());
@@ -44,7 +46,7 @@ public class DynamicCalculationServiceImpl implements DynamicCalculationService 
 
     public FormulaResponse getFormula(@Valid @Min(0) @Digits(integer=10000, fraction=0) int id) {
         try {
-            return formulaRepository.getFormula(id);
+            return formulaRepositoryImpl.getFormula(id);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
