@@ -32,12 +32,12 @@ public class FormulaEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createFormulaRequest")
     @ResponsePayload
     public FormulaResponse createFormulaRequest(@Valid @RequestPayload CreateFormulaRequest request) {
-        return calculatorService.createFormula(request.getFormula());
+        return calculatorService.createFormula(Double.parseDouble(request.getFormula()));
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFormulaRequest")
     @ResponsePayload
     public FormulaResponse getFormulaRequest(@Valid @RequestPayload GetFormulaRequest request) {
-        return calculatorService.getFormula(request.getId().intValue());
+        return calculatorService.getFormula(Integer.parseInt(request.getId()));
     }
 }
