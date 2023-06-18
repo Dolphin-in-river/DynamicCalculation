@@ -22,18 +22,19 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
+
     @Bean(name = "formulas")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema formulasSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("FormulasPort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("http://www.baeldung.com/springsoap/gen");
-        wsdl11Definition.setSchema(countriesSchema);
+        wsdl11Definition.setSchema(formulasSchema);
         return wsdl11Definition;
     }
 
     @Bean
-    public XsdSchema countriesSchema() {
+    public XsdSchema formulasSchema() {
         return new SimpleXsdSchema(new ClassPathResource("xsds/formulas.xsd"));
     }
 }
