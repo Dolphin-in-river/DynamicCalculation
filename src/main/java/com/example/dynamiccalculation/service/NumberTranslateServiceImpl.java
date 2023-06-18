@@ -109,9 +109,10 @@ public class NumberTranslateServiceImpl implements NumberTranslateService {
             }
             if (intPart == 0) fracStr += ZERO;
             int lastNumber = intPart % 10;
+            int lastTwoNumbers = intPart % 100;
             if (lastNumber == 1 && intPart % 100 != 11) fracStr += WHOLE_WORD_AFTER_ONE;
-            if (lastNumber > 1 && lastNumber <= 4) fracStr += WHOLE_WORD_AFTER_TWO_UNDER_FOUR;
-            if (lastNumber == 0 || lastNumber > 4) fracStr += WHOLE_WORD_AFTER_FOUR;
+            if (lastNumber > 1 && lastNumber <= 4 && (lastTwoNumbers <= 11 || lastTwoNumbers > 14)) fracStr += WHOLE_WORD_AFTER_TWO_UNDER_FOUR;
+            if (lastNumber == 0 || lastNumber > 4 || (lastTwoNumbers > 11 && lastTwoNumbers <= 14)) fracStr += WHOLE_WORD_AFTER_FOUR;
             String newFormula = String.valueOf(BigDecimal.valueOf(fractionalPart));
             String cutFormula = newFormula.substring(2);
             int value = Integer.parseInt(cutFormula);

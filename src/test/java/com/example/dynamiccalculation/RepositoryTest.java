@@ -49,15 +49,14 @@ public class RepositoryTest {
     private DynamicCalculationServiceImpl service;
 
     @Test
-    public void checkFormulaIdWhenInsertExistsThenReturnsFormula() throws SQLException, ClassNotFoundException {
+    public void checkFormulaIdWhenInsertExistsFormula() {
         service.createFormula(20.002);
         Assertions.assertEquals(1, service.createFormula(20.002).getId());
     }
 
-//    @Test
-//    public void checkCorrectDataFromGetRequest() {
-//        var formula = formulaRepository.getFormula(2);
-//        Assertions.assertEquals(22.12, formula.getNumber());
-//        Assertions.assertEquals("двадцать двe целые двенадцать сотых", formula.getFormula());
-//    }
+    @Test
+    public void checkFormulaIdWhenInsertFormula() {
+        service.createFormula(213.191);
+        Assertions.assertEquals("двести тринадцать целых сто девяносто одна тысячная", service.getFormula(2).getFormula());
+    }
 }
