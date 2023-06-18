@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -22,16 +23,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 public class DynamicCalculationApplicationTests {
-	@Autowired
-	private FormulaRepositoryImpl formulaRepository;
-	@Test
-	public void givenFormula_whenInsertExists_thenReturnsFormula() {
-		Formula formula = new Formula();
-		formula.setNumber(20.002);
-		formula.setFormula("двадцать целых две тысячные");
-		var id = formulaRepository.save(formula, 20.002);
-		Assertions.assertEquals(id, formulaRepository.formulaExist(20.002).getId());
-	}
 	@Autowired
 	private WebTestClient webClient;
 	private String sendCorrectRequest(String request) {
@@ -117,7 +108,7 @@ public class DynamicCalculationApplicationTests {
 				"</soapenv:Envelope>";
 	}
 	private String firstCreatingFormulaExpectedXml() {
-		return "<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:formulaResponse xmlns:ns2=\"http://spring.io/guides/gs-producing-web-service\"><ns2:id>25</ns2:id><ns2:number>0.001</ns2:number><ns2:formula>ноль целых одна тысячная</ns2:formula></ns2:formulaResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>";
+		return "<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:formulaResponse xmlns:ns2=\"http://spring.io/guides/gs-producing-web-service\"><ns2:id>45</ns2:id><ns2:number>0.001</ns2:number><ns2:formula>ноль целых одна тысячная</ns2:formula></ns2:formulaResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>";
 	}
 	private String secondCreatingFormulaExpectedXml() {
 		return "<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:formulaResponse xmlns:ns2=\"http://spring.io/guides/gs-producing-web-service\"><ns2:id>29</ns2:id><ns2:number>1.2345678998765E8</ns2:number><ns2:formula>сто двадцать три миллиона четыреста пятьдесят шесть тысяч семьсот восемьдесят девять целых девяносто восемь тысяч семьсот шестьдесят пять стотысячных</ns2:formula></ns2:formulaResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>";

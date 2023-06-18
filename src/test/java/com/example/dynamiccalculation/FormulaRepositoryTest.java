@@ -21,9 +21,10 @@
 //import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 //@RunWith(SpringRunner.class)
 //@ActiveProfiles("test")
-//@DataJdbcTest
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-//@AutoConfigureDataJdbc
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+////@DataJdbcTest
+////@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+////@AutoConfigureDataJdbc
 //public class FormulaRepositoryTest {
 //    @Autowired
 //    private FormulaRepositoryImpl formulaRepository;
