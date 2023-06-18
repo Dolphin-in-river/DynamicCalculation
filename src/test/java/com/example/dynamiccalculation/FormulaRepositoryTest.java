@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @DataJdbcTest
@@ -20,6 +21,7 @@ public class FormulaRepositoryTest {
     public static final double VALUE = 3213.32112;
     @Autowired
     private FormulaRepositoryImpl formulaRepository;
+
     @Test
     public void givenFormula_whenInsertExists_thenReturnsFormula() {
         Formula formula = new Formula();

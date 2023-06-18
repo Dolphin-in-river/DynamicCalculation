@@ -1,4 +1,5 @@
 package com.example.dynamiccalculation.service;
+
 import io.spring.guides.gs_producing_web_service.FormulaResponse;
 import com.example.dynamiccalculation.data.FormulaRepositoryImpl;
 import io.spring.guides.gs_producing_web_service.Formula;
@@ -32,23 +33,20 @@ public class DynamicCalculationServiceImpl implements DynamicCalculationService 
                 response.setNumber(result.getNumber());
                 response.setFormula(result.getFormula());
                 return response;
-            }
-            else{
+            } else {
                 return formulaResponse;
             }
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
-    public FormulaResponse getFormula(@Valid @Min(0) @Digits(integer=10000, fraction=0) int id) {
+    public FormulaResponse getFormula(@Valid @Min(0) @Digits(integer = 10000, fraction = 0) int id) {
         try {
             return formulaRepositoryImpl.getFormula(id);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new IllegalArgumentException("Formula not found with id " + id);
         }
