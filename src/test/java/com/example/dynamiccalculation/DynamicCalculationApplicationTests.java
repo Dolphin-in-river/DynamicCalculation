@@ -1,5 +1,6 @@
 package com.example.dynamiccalculation;
 
+import com.example.dynamiccalculation.service.NumberTranslateServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DynamicCalculationApplicationTests {
     @Autowired
     private WebTestClient webClient;
-
     private String sendCorrectRequest(String request) {
         return webClient.post().uri("/ws")
                 .contentType(MediaType.TEXT_XML)
@@ -42,6 +42,12 @@ public class DynamicCalculationApplicationTests {
                 .expectStatus().is5xxServerError()
                 .expectBody(String.class)
                 .returnResult().getResponseBody();
+    }
+
+    @Test
+    public void TestingTranslateNumber() {
+        var numberTranslateService = new NumberTranslateServiceImpl();
+        assertThat(numberTranslateService.getTranslate(20.021)).isEqualTo("двадцать целых двадцать одна тысячная");
     }
 
     @Test

@@ -14,8 +14,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-
     <xs:element name="getFormulaRequest">
         <xs:complexType>
             <xs:sequence>
@@ -29,7 +27,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
     <xs:element name="formulaResponse">
         <xs:complexType>
             <xs:sequence>

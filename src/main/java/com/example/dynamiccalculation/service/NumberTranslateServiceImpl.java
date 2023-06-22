@@ -117,10 +117,15 @@ public class NumberTranslateServiceImpl implements NumberTranslateService {
                 fracStr += WHOLE_WORD_AFTER_FOUR;
             String newFormula = String.valueOf(BigDecimal.valueOf(fractionalPart));
             String cutFormula = newFormula.substring(2);
-            int value = Integer.parseInt(cutFormula);
+
+            String doublePart = cutFormula;
+            if (fractionalPart <= 0.00009) { //Борьба за точность
+                doublePart = cutFormula.substring(0, cutFormula.length() - 1);
+            }
+            int value = Integer.parseInt(doublePart);
             fracStr += numToStr(value, doubleNums);
             fracStr += " ";
-            fracStr += partitions[cutFormula.length()];
+            fracStr += partitions[doublePart.length()];
             if (value % 10 == 1 && intPart % 100 != 11) { // поведение, когда последняя цифра числа 1 у 11 другое
                 String finalCut = fracStr.substring(0, fracStr.length() - 2);
                 finalCut += LAST_SYMBOLS_OF_ONE_IN_DOUBLE_PART;
