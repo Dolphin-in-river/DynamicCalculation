@@ -23,7 +23,7 @@ public class FormulaRepositoryTest {
     private FormulaRepositoryImpl formulaRepository;
 
     @Test
-    public void givenFormula_whenInsertExists_thenReturnsFormula() {
+    public void checkCorrectSaveAndGetFormula() {
         Formula formula = new Formula();
         formula.setNumber(VALUE);
         String formulaTranslate = "три тысячи двести тринадцать целых тридцать две тысячи сто двенадцать стотысячных";

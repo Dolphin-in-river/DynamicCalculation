@@ -53,7 +53,6 @@ public class NumberTranslateServiceImpl implements NumberTranslateService {
                 if (param < TWENTY) {
                     return printResult(numToStr(param, arr_nums) + " " + thousands[0], numToStr(n % THOUSAND, arr_nums));
                 }
-                int countThousand = param;
                 param /= TEN; // Убираем последнюю цифру
                 if (n % TEN_THOUSAND < THOUSAND) // Если старший разряд заканчивается на 0
                     return printResult(numToStr(param * TEN, arr_nums) + " " + thousands[0], numToStr(n % TEN_THOUSAND, arr_nums));
