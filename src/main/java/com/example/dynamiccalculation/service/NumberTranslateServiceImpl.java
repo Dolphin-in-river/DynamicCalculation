@@ -93,6 +93,9 @@ public class NumberTranslateServiceImpl implements NumberTranslateService {
         int intPart = bigD.intValue();
         double fractionalPart = bigD.subtract(BigDecimal.valueOf(intPart)).doubleValue();
 
+        if (intPart == 0 && fractionalPart == 0) {
+            return "ноль целых ноль десятых";
+        }
         String wholeStr = numToStr(intPart, nums);
         String fracStr = "";
         if (fractionalPart > 0) {
