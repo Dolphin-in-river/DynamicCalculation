@@ -28,7 +28,7 @@ public class FormulaRepositoryTest {
         formula.setNumber(VALUE);
         String formulaTranslate = "три тысячи двести тринадцать целых тридцать две тысячи сто двенадцать стотысячных";
         formula.setFormula(formulaTranslate);
-        var id = formulaRepository.save(formula, 3213.32112);
+        var id = formulaRepository.save(formula);
         Assertions.assertEquals(formulaTranslate, formulaRepository.getFormula(id).getFormula());
     }
 }

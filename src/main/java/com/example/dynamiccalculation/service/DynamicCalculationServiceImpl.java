@@ -19,19 +19,19 @@ public class DynamicCalculationServiceImpl implements DynamicCalculationService 
     @Autowired
     private FormulaRepositoryImpl formulaRepositoryImpl;
 
-    public FormulaResponse createFormula(@Valid @DecimalMin("0") @DecimalMax("1000000000") double formula) {
+    public FormulaResponse createFormula(@Valid @DecimalMin("0") @DecimalMax("1000000000") double number) {
         try {
-            FormulaResponse formulaResponse = formulaRepositoryImpl.formulaExist(formula);
+            FormulaResponse formulaResponse = formulaRepositoryImpl.formulaExist(number);
             if (formulaResponse == null) {
-                String translate = numberTranslateService.getTranslate(formula);
-                Formula result = new Formula();
-                result.setFormula(translate);
-                result.setNumber(formula);
-                int id = formulaRepositoryImpl.save(result, formula);
+                String translate = numberTranslateService.getTranslate(number);
+                Formula formula = new Formula();
+                formula.setFormula(translate);
+                formula.setNumber(number);
+                int id = formulaRepositoryImpl.save(formula);
                 FormulaResponse response = new FormulaResponse();
                 response.setId(id);
-                response.setNumber(result.getNumber());
-                response.setFormula(result.getFormula());
+                response.setNumber(formula.getNumber());
+                response.setFormula(formula.getFormula());
                 return response;
             } else {
                 return formulaResponse;

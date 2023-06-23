@@ -4,7 +4,7 @@ import io.spring.guides.gs_producing_web_service.Formula;
 import io.spring.guides.gs_producing_web_service.FormulaResponse;
 
 public interface FormulaRepository {
-    int save(Formula result, double inputNumber);
+    int save(Formula result);
 
     FormulaResponse getFormula(int id);
 

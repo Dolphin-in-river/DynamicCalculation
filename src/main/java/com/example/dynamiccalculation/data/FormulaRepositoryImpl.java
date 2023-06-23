@@ -13,8 +13,8 @@ import java.util.List;
 public class FormulaRepositoryImpl implements FormulaRepository{
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    public int save(Formula result, double inputNumber) {
-        jdbcTemplate.update("INSERT INTO formulas (number, formula) VALUES (?, ?)", inputNumber, result.getFormula());
+    public int save(Formula result) {
+        jdbcTemplate.update("INSERT INTO formulas (number, formula) VALUES (?, ?)", result.getNumber(), result.getFormula());
         return jdbcTemplate.queryForObject("SELECT lastval()", Integer.class);
     }
     public FormulaResponse getFormula(int id) {
